@@ -32,13 +32,13 @@ function Table () {
             <tr>
                 <td>Lazar</td>
                 <td>Todorovic</td>
-                <td>01/18/2024</td>
-                <td>Engineering</td>
-                <td>01/17/2024</td>
+                <td>12/07/2024</td>
+                <td>Web Development</td>
+                <td>01/04/1993</td>
                 <td>17 Rue de Paris</td>
                 <td>Paris</td>
-                <td>AK</td>
-                <td>123456</td>
+                <td>FR</td>
+                <td>75004</td>
             </tr>
         </table>
         </div>
