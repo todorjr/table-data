@@ -13,7 +13,7 @@ th {
 
 .table-container {
     position: relative;
-    padding-top: 2em; /* This gives space for your controls */
+    padding-top: 2em;
 }
 
 .table-controls {
