@@ -13,11 +13,12 @@ function Table () {
             </select>
         </div>
         <div className="search-box">
-            <input type="text" id="search" placeholder="Search..." />
             <button type="button" id="search-btn">Search</button>
+            <input type="text" id="search" placeholder="Search..." />
         </div>
     </div>
         <table>
+            <tbody>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -40,6 +41,7 @@ function Table () {
                 <td>FR</td>
                 <td>75004</td>
             </tr>
+            </tbody>
         </table>
         </div>
     )
