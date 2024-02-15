@@ -32,10 +32,14 @@ h2 {
     align-items: center;
 }
 
+.show-by {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .show-entries label {
     margin-right: 0.5em;
 }
 
 .search-box input[type="text"] {
-    margin-right: 0.5em;
+    margin-left: 0.5em;
 }
