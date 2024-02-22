@@ -54,8 +54,6 @@ function Table () {
         handleEntriesChange 
     } = useTableControls(employees)
 
-    console.log(Array(totalPages));
-
     return (
         <div>
         <h2>Current Employees</h2>
