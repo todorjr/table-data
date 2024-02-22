@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import useTableControls from '../hooks/useTableControls'
 
 function Table () {
 
@@ -44,40 +44,17 @@ function Table () {
         { header: 'State', key: 'state' },
         { header: 'Zip Code', key: 'zipCode' }
     ];
-    
-    const [currentPage, setCurrentPage] = useState(1) // Set a initial state of current page
-    const [entriesToShow, setEntriesToShow] = useState(10) // Set a initial state of current employees number to show
-    const [totalPages, setTotalPages] = useState(0)
-    
 
-    useEffect(() => {
-        setTotalPages(Math.ceil(employees.length / entriesToShow)) // Math.ceil rounds up and integer from employees length and show-by value quotient
-    }, [employees.length, entriesToShow])
+    const { 
+        currentPage, 
+        entriesToShow, 
+        totalPages, 
+        selectedData: selectedEmployees, 
+        goToPage, 
+        handleEntriesChange 
+    } = useTableControls(employees)
 
-    /**
-     * Changes the number of entries to show per page and resets the current page to the first page.
-     * @param {Event} event - The event object from the select element.
-     */
-    const handleEntriesChange = (event) => {
-        setEntriesToShow(Number(event.target.value))
-        setCurrentPage(1) // Reset to first page when entries per page change
-    }
-
-    /**
-     * Changes the current page number.
-     * @param {number} page - The page number to navigate to.
-     */
-    const goToPage = (page) => {
-        setCurrentPage(page)
-    }
-
-    const startIndex = (currentPage - 1) * entriesToShow // Calculate the start index for slicing the employees array based on the current page
-
-    /**
-     * Selected employees for the current page.
-     * This is a subset of the employees array, sliced according to the current page and number of entries to show.
-     */
-    const selectedEmployees = employees.slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of employees
+    console.log(Array(totalPages));
 
     return (
         <div>
@@ -119,6 +96,8 @@ function Table () {
         </table>
         <div className="pagination" style={{textAlign: 'right', marginTop: '10px'}}>
             {Array(totalPages).fill().map((_, index) => {
+                console.log(arguments);
+                console.log(index);
                 const pageNumber = index + 1;
                     return (
                         <button
