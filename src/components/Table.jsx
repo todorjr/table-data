@@ -94,8 +94,6 @@ function Table () {
         </table>
         <div className="pagination" style={{textAlign: 'right', marginTop: '10px'}}>
             {Array(totalPages).fill().map((_, index) => {
-                console.log(arguments);
-                console.log(index);
                 const pageNumber = index + 1;
                     return (
                         <button
