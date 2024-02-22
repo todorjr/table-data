@@ -51,7 +51,7 @@ function Table () {
     
 
     useEffect(() => {
-        setTotalPages(Math.ceil(employees.length / entriesToShow))
+        setTotalPages(Math.ceil(employees.length / entriesToShow)) // Math.ceil rounds up and integer from employees length and show-by value quotient
     }, [employees.length, entriesToShow])
 
     /**
@@ -77,7 +77,7 @@ function Table () {
      * Selected employees for the current page.
      * This is a subset of the employees array, sliced according to the current page and number of entries to show.
      */
-    const selectedEmployees = employees.slice(startIndex, startIndex + entriesToShow)
+    const selectedEmployees = employees.slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of employees
 
     return (
         <div>
