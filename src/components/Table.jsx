@@ -93,7 +93,7 @@ function Table () {
             </tbody>
         </table>
         <div className="pagination" style={{textAlign: 'right', marginTop: '10px'}}>
-            {Array(totalPages).fill().map((_, index) => {
+            {Array(totalPages).fill().map((_, index) => { // Here we need an array to show list of our page number ex: [0,1,2]
                 const pageNumber = index + 1;
                     return (
                         <button
