@@ -10,8 +10,8 @@ function useTableControls (data) {
     const [currentPage, setCurrentPage] = useState(1) // Set a initial state of current page
     const [entriesToShow, setEntriesToShow] = useState(10) // Set a initial state of current employees number to show
     const [totalPages, setTotalPages] = useState(0)
-    
-    
+    const [searchQuery, setSearchQuery] = useState('')
+
     useEffect(() => {
         setTotalPages(Math.ceil(data.length / entriesToShow)) // Math.ceil rounds up and integer from data length and show-by value quotient
     }, [data.length, entriesToShow])
@@ -35,11 +35,32 @@ function useTableControls (data) {
     
     const startIndex = (currentPage - 1) * entriesToShow // Calculate the start index for slicing the data array based on the current page
     
+
+    /**
+     * Filters the data array based on the provided search query.
+     * @param {Array} data - The array of items to filter.
+     * @param {string} searchQuery - The search query to filter items by.
+     * @returns {Array} - The filtered array of items.
+    */
+    const filterData = () => {
+        return data.filter((item) =>
+            Object.values(item).some((value) =>
+                value.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+        );
+    }
+
     /**
      * Selected employees for the current page.
      * This is a subset of the data array, sliced according to the current page and number of entries to show.
      */
-    const selectedData = data.slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of data
+    const selectedData = filterData().slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of data + search query option
+
+
+    const handleSearchChange = (query) => {
+        setSearchQuery(query)
+        setCurrentPage(1)
+    };
 
     return { 
         currentPage, 
@@ -47,7 +68,8 @@ function useTableControls (data) {
         totalPages, 
         selectedData, 
         goToPage, 
-        handleEntriesChange 
+        handleEntriesChange,
+        handleSearchChange
     };
 }
 

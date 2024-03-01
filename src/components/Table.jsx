@@ -51,7 +51,9 @@ function Table () {
         totalPages, 
         selectedData: selectedEmployees, 
         goToPage, 
-        handleEntriesChange 
+        handleEntriesChange,
+        handleSearchChange
+
     } = useTableControls(employees)
 
     return (
@@ -69,8 +71,13 @@ function Table () {
             </select>
         </div>
         <div className="search-box">
-            <button type="button" id="search-btn">Search</button>
-            <input type="text" id="search" placeholder="Search..." />
+            <button type="button" id="search-btn" onClick={() => handleSearchChange(document.getElementById('search').value)}>Search</button>
+            <input
+                type="text"
+                id="search"
+                placeholder="Search..."
+                onChange={(e) => handleSearchChange(e.target.value)}
+            />
         </div>
     </div>
         <table>
