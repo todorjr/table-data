@@ -1,4 +1,6 @@
 import useTableControls from '../hooks/useTableControls'
+import { BsArrowUp, BsArrowDown } from 'react-icons/bs'
+
 
 function Table () {
 
@@ -52,7 +54,9 @@ function Table () {
         selectedData: selectedEmployees, 
         goToPage, 
         handleEntriesChange,
-        handleSearchChange
+        handleSearchChange,
+        sortData,
+        sortConfig
 
     } = useTableControls(employees)
 
@@ -84,7 +88,23 @@ function Table () {
             <thead>
                 <tr>
                     {columns.map((column, index) => (
-                        <th key={index}>{column.header}</th>
+                        <th key={index}>{column.header}
+                    <button
+                        onClick={() => sortData(column.key)}
+                        className={`sort-arrow ${
+                            sortConfig.key === column.key
+                                ? sortConfig.direction === 'asc'
+                                    ? 'asc'
+                                    : 'desc'
+                                : ''
+                        }`}
+                        style={{marginLeft: '5px', border: 'none', backgroundColor: 'white'}}>
+                        <div className="arrows" style={{display: 'flex', flexDirection: 'column'}}>
+                            <span>{<BsArrowUp />} </span>
+                            <span>{<BsArrowDown />}</span>
+                        </div>
+                    </button>
+                    </th>
                     ))}
                     
                 </tr>
@@ -93,8 +113,7 @@ function Table () {
                 {selectedEmployees.map((employee, index) => (
                         <tr key={index}>
                             {columns.map(column => (
-                                <td key={column.key}>{employee[column.key]}</td>
-                            ))}
+                                <td key={column.key}>{employee[column.key]}</td>))}
                         </tr>
                     ))}
             </tbody>
@@ -106,8 +125,7 @@ function Table () {
                         <button
                             key={pageNumber}
                             onClick={() => goToPage(pageNumber)}
-                            disabled={currentPage === pageNumber}
-                        >
+                            disabled={currentPage === pageNumber}>
                             {pageNumber}
                         </button>
                     );

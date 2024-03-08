@@ -11,6 +11,8 @@ function useTableControls (data) {
     const [entriesToShow, setEntriesToShow] = useState(10) // Set a initial state of current employees number to show
     const [totalPages, setTotalPages] = useState(0)
     const [searchQuery, setSearchQuery] = useState('')
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
+
 
     useEffect(() => {
         setTotalPages(Math.ceil(data.length / entriesToShow)) // Math.ceil rounds up and integer from data length and show-by value quotient
@@ -47,20 +49,58 @@ function useTableControls (data) {
             Object.values(item).some((value) =>
                 value.toLowerCase().includes(searchQuery.toLowerCase())
             )
-        );
+        )
+    }
+
+    /**
+     * Updates the sorting configuration based on the specified key.
+     *
+     * @param {string} sortedKey - The key to use for sorting.
+     * @returns {void}
+     */
+    const sortData = (sortedKey) => {
+        let direction = 'asc'
+        // If the current sorting key matches the specified key and is in ascending order, update the direction to descending otherwise, set it to ascending
+        if (sortConfig.key === sortedKey && sortConfig.direction === 'asc') { 
+            direction = 'desc'
+        }
+        setSortConfig({ key: sortedKey, direction }) // Update the sorting configuration
+    }
+
+    /**
+     * Sorts the filtered data array based on the current sorting configuration
+     * @returns {Array} - The sorted array of items.
+     */
+    const sortedData = () => {
+        if (sortConfig.key) {
+            return filterData().sort((a, b) => {
+                const aValue = a[sortConfig.key].toLowerCase()
+                const bValue = b[sortConfig.key].toLowerCase()
+
+                if (aValue < bValue) {
+                    return sortConfig.direction === 'asc' ? -1 : 1
+                } else if (aValue > bValue) {
+                    return sortConfig.direction === 'asc' ? 1 : -1
+                } else {
+                    return 0
+                }
+            })
+        } else {
+            return filterData() // If no sorting key is specified, return the unsorted filtered data
+
+        }
     }
 
     /**
      * Selected employees for the current page.
      * This is a subset of the data array, sliced according to the current page and number of entries to show.
      */
-    const selectedData = filterData().slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of data + search query option
-
+    const selectedData = sortedData().slice(startIndex, startIndex + entriesToShow) // For every page set we will return exact number of data + search query option
 
     const handleSearchChange = (query) => {
         setSearchQuery(query)
         setCurrentPage(1)
-    };
+    }
 
     return { 
         currentPage, 
@@ -69,8 +109,10 @@ function useTableControls (data) {
         selectedData, 
         goToPage, 
         handleEntriesChange,
-        handleSearchChange
-    };
+        handleSearchChange,
+        sortData,
+        sortConfig
+    }
 }
 
 export default useTableControls
