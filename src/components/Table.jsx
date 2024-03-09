@@ -36,7 +36,7 @@ function Table () {
         { firstName: 'Nina', lastName: 'Harris', startDate: '12/15/2022', department: 'Quality Assurance', birthDate: '04/11/1994', street: '1212 Banana St', city: 'Detroit', state: 'MI', zipCode: '48201' }
     ];
     const columns = [
-        { header: 'First Name', key: 'firstName' },
+        { header: 'First Name', key: 'firstName' }, // add type for every column
         { header: 'Last Name', key: 'lastName' },
         { header: 'Start Date', key: 'startDate' },
         { header: 'Department', key: 'department' },
