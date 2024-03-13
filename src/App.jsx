@@ -1,10 +1,10 @@
 import Table from "./components/Table"
 import './App.css'
 
-function TableData() {
+function App() {
   return (
     <Table />
   )
 }
 
-export default TableData
+export default App

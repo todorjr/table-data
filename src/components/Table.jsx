@@ -2,7 +2,7 @@ import useTableControls from '../hooks/useTableControls'
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs'
 
 
-function Table (employees) {
+export default function Table (employees) {
 
     // const employees = [
     //     { firstName: 'John', lastName: 'Doe', startDate: '01/01/2022', department: 'Marketing', birthDate: '02/15/1985', street: '123 Main St', city: 'New York', state: 'NY', zipCode: '10001' },
@@ -134,5 +134,3 @@ function Table (employees) {
         </div>
     )
 }
-
-export default Table
