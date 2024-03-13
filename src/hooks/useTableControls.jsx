@@ -13,10 +13,11 @@ function useTableControls (data) {
     const [searchQuery, setSearchQuery] = useState('')
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
 
-
-    useEffect(() => {
-        setTotalPages(Math.ceil(data.length / entriesToShow)) // Math.ceil rounds up and integer from data length and show-by value quotient
-    }, [data.length, entriesToShow])
+    useEffect(() => { // Math.ceil rounds up and integer from data length and show-by value quotient
+        if (Array.isArray(data)) {
+            setTotalPages(Math.ceil(data.length / entriesToShow));
+        }
+    }, [data, entriesToShow]);
     
     /**
      * Changes the number of entries to show per page and resets the current page to the first page.
