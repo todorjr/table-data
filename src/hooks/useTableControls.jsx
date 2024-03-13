@@ -45,6 +45,11 @@ function useTableControls (data) {
      * @returns {Array} - The filtered array of items.
     */
     const filterData = () => {
+        if (!Array.isArray(data)) {
+            console.error("Data is not an array.");
+            return [];
+        }
+        console.log(data, 'data')
         return data.filter((item) =>
             Object.values(item).some((value) =>
                 value.toLowerCase().includes(searchQuery.toLowerCase())
