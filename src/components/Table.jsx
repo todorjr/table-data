@@ -16,22 +16,6 @@ export default function Table ({employees}) {
         { header: 'State', key: 'state' },
         { header: 'Zip Code', key: 'zipCode' }
     ]
-    const [employeeData, setEmployeeData] = useState([])
-
-    useEffect(() => {
-        const storedData = localStorage.getItem('employees')
-        if (storedData) {
-        setEmployeeData(JSON.parse(storedData))
-        } else {
-        setEmployeeData(employees)
-        }
-    }, [employees])
-
-    useEffect(() => {
-        localStorage.setItem('employees', JSON.stringify(employeeData))
-    }, [employeeData])
-
-
     const { 
         currentPage, 
         entriesToShow, 
@@ -48,8 +32,6 @@ export default function Table ({employees}) {
         return (
         <div className="table-container">
             <h2>Current Employees</h2>
-            {selectedEmployees.length > 0 ? (
-            <>
                 <div className="table-controls">
                     <div className="show-entries">
                         <label className="show-by" htmlFor="show-by">Show by:</label>
@@ -71,6 +53,8 @@ export default function Table ({employees}) {
                         />
                     </div>
                 </div>
+        {selectedEmployees.length > 0 ? (
+            <>
                 <table>
                     <thead>
                         <tr>
@@ -120,7 +104,10 @@ export default function Table ({employees}) {
                 </div>
             </>
             ): (
-                <h4>No employees found</h4>
+                <div className="empty-result">
+                    <h4>No employees found</h4>
+                    <p>Please refine your search criteria or add new employees.</p>
+                </div>
             )}
         </div>
         )
