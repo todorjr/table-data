@@ -48,7 +48,7 @@ export default function Table ({employees}) {
                             type="button" 
                             id="search-btn" 
                             onClick={() => handleSearchChange(document.getElementById('search').value)}
-                            style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '5px' }}
+                            style={{ backgroundColor: '#ffffff', color: '#000', border: '1px solid #007bff', padding: '8px 16px', borderRadius: '5px' }}
                         >
                             Search
                         </button>
