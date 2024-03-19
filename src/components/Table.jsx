@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
+
 import useTableControls from '../hooks/useTableControls'
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs'
 
-
+// eslint-disable-next-line react/prop-types
 export default function Table ({employees}) {
     const columns = [
         { header: 'First Name', key: 'firstName' }, // add type for every column
@@ -14,6 +16,20 @@ export default function Table ({employees}) {
         { header: 'State', key: 'state' },
         { header: 'Zip Code', key: 'zipCode' }
     ]
+    const [employeeData, setEmployeeData] = useState([])
+
+    useEffect(() => {
+        const storedData = localStorage.getItem('employees')
+        if (storedData) {
+        setEmployeeData(JSON.parse(storedData))
+        } else {
+        setEmployeeData(employees)
+        }
+    }, [employees])
+
+    useEffect(() => {
+        localStorage.setItem('employees', JSON.stringify(employeeData))
+    }, [employeeData])
 
 
     const { 
@@ -89,7 +105,7 @@ export default function Table ({employees}) {
         </table>
         <div className="pagination" style={{textAlign: 'right', marginTop: '10px'}}>
             {Array(totalPages).fill().map((_, index) => { // Here we need an array to show list of our page number ex: [0,1,2]
-                const pageNumber = index + 1;
+                const pageNumber = index + 1
                     return (
                         <button
                             key={pageNumber}
@@ -97,7 +113,7 @@ export default function Table ({employees}) {
                             disabled={currentPage === pageNumber}>
                             {pageNumber}
                         </button>
-                    );
+                    )
                 })}
             </div>
         </div>
