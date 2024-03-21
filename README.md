@@ -8,8 +8,9 @@ To install the package, use the following npm command:
 
 ```bash
 npm install data-render-table
+```
 
-## Usage
+### Usage
 
 Below is an example of how to use the `Table` component from `data-render-table` in a your application:
 
@@ -26,8 +27,9 @@ function TableEmployees({ employees }) {
 }
 
 export default TableEmployees;
+```
 
-## Features
+# Features
 
 - **Pagination**: Control the number of records visible per page.
 - **Search**: Include a search function to filter the table data.
@@ -52,7 +54,6 @@ If you're interested in enhancing the project, please follow these steps:
 ## License
 
 `data-render-table` is licensed under the MIT License. See the LICENSE file in the repository for more information.
-
 
 # React + Vite
 
