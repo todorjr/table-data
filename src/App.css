@@ -10,7 +10,7 @@ body {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.86); 
- }
+}
 
 .empty-result {
     display: flex;
@@ -108,5 +108,26 @@ th:last-child {
     background-color: #cccccc;
     cursor: default;
 }
+.sort-arrow {
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.sort-arrow .arrows span {
+    display: none;
+}
+
+.sort-arrow.asc .arrows span.asc,
+.sort-arrow.desc .arrows span.desc {
+    display: block;
+    color: #007bff;
+}
+
+.sort-arrow span.inactive {
+    display: block;
+    color: #ccc;
+}
 

@@ -67,25 +67,20 @@ export default function Table ({employees}) {
                         <thead>
                             <tr>
                                 {columns.map((column, index) => (
-                                    <th key={index}>{column.header}
-                                <button
-                                    onClick={() => sortData(column.key)}
-                                    className={`sort-arrow ${
-                                        sortConfig.key === column.key
-                                            ? sortConfig.direction === 'asc'
-                                                ? 'asc'
-                                                : 'desc'
-                                            : ''
-                                    }`}
-                                    style={{ border: 'none', backgroundColor: 'transparent' }}
-                                    aria-label={`Sort by ${column.header} ${sortConfig.key === column.key ? (sortConfig.direction === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
-                                >
-                                    <div className="arrows" style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <span><BsArrowUp aria-hidden="true" /></span>
-                                        <span><BsArrowDown aria-hidden="true" /></span>
-                                    </div>
-                                </button>
-                                </th>
+                                <th key={index}>
+                                {column.header}
+                                    <button
+                                        onClick={() => sortData(column.key)}
+                                        className={`sort-arrow ${sortConfig.key === column.key ? sortConfig.direction : ''}`}
+                                        style={{ border: 'none', backgroundColor: 'transparent' }}
+                                        aria-label={`Sort by ${column.header} ${sortConfig.key === column.key ? (sortConfig.direction === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
+                                    >
+                                        <div className="arrows">
+                                            <span className={`asc ${sortConfig.key === column.key && sortConfig.direction === 'asc' ? '' : 'inactive'}`}><BsArrowUp aria-hidden="true" /></span>
+                                            <span className={`desc ${sortConfig.key === column.key && sortConfig.direction === 'desc' ? '' : 'inactive'}`}><BsArrowDown aria-hidden="true" /></span>
+                                        </div>
+                                    </button>
+                            </th>                            
                                 ))}
                                 
                             </tr>
