@@ -78,8 +78,21 @@ function useTableControls (data) {
     const sortedData = () => {
         if (sortConfig.key) {
             return filterData().sort((a, b) => {
-                const aValue = a[sortConfig.key].toLowerCase()
-                const bValue = b[sortConfig.key].toLowerCase()
+                const aDate = new Date(a[sortConfig.key])
+                const bDate = new Date(b[sortConfig.key])
+
+                const isDate = !isNaN(aDate) && !isNaN(bDate)
+
+                let aValue = a[sortConfig.key]
+                let bValue = b[sortConfig.key]
+
+                if (isDate) {
+                    aValue = aDate
+                    bValue = bDate
+                } else {
+                    aValue = aValue.toLowerCase()
+                    bValue = bValue.toLowerCase()
+                }
 
                 if (aValue < bValue) {
                     return sortConfig.direction === 'asc' ? -1 : 1
@@ -91,9 +104,9 @@ function useTableControls (data) {
             })
         } else {
             return filterData() // If no sorting key is specified, return the unsorted filtered data
-
         }
     }
+
 
     /**
      * Selected employees for the current page.
